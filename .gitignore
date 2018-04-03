@@ -1,0 +1,9 @@
+# pyc
+*.pyc
+
+# IDEA 
+venv
+.idea
+
+# git
+.git
