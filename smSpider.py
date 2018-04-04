@@ -70,62 +70,22 @@ class SmSpider:
         # self.__getPageStocks__(2)
         # int(self.pageCount) + 1
         for index in  range(1,int(self.pageCount) + 1) :
-            time.sleep(1)
             self.__getPageStocks__(index)
 
-# ## 构造请求头部和cookies 设置登陆帐号密码
-# cookies = cookielib.CookieJar()
-# opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookies))
-# postdata = urllib.urlencode({
-#             'id':'jalon',
-#             'passwd':'513513'
-#         })
-# headers = { 'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36',
-#             "Referer":"http://www.newsmth.net/nForum/",
-#             "Host":"www.newsmth.net",
-#             "Origin":"http://www.newsmth.net",
-#             "X-Requested-With":"XMLHttpRequest"}
-#
-# ## 登陆页面
-# loginUrl = "http://www.newsmth.net/nForum/user/ajax_login.json"
-# request =  urllib2.Request(loginUrl,postdata,headers)
-# response = opener.open(request)
-# loginMsg = response.read().decode("GBK")
-# #print(loginMsg)
-#
-# ## 网页内容
-# pageUrlPre="http://www.newsmth.net/nForum/article/SMIF/1074107?ajax&p="
-# pageUrlSuf=16
-# pageUrl = pageUrlPre + str(pageUrlSuf)
-# response = opener.open(pageUrl)
-# pageMsg= response.read().decode("GBK")
-# #print(pageMsg)
-#
-# ## 解析页面
-#
-# pattern = re.compile('<td class="a-content">.*?<br />&nbsp;&nbsp;<br />(.*?)--.*?</td>', re.S)
-# items = re.findall(pattern, pageMsg)
-# stockkList = []
-# for item in items:
-#     sitem = item.encode("UTF-8")
-#     #print (sitem)
-#     if sitem.find("在 wanxiaotong 的大作中提到:") < 0 :
-#         if  sitem.find("S") > -1 or sitem.find("B") > -1:
-#             #print (sitem.replace("<br />","").replace("&nbsp;",""))
-#             rows = sitem.replace("&nbsp;","").strip()
-#             #print(rows)
-#             stockkList.extend( rows.split("<br />"))
-#
-#
-# stockkList = filter(lambda s : s and s.strip() ,stockkList)
-#
-# for item in stockkList :
-#     print(item.strip())
+if __name__ == '__main__':
+    from optparse import OptionParser
+    from SMWanStack import config
 
+    parser = OptionParser()
+    parser.add_option("-c", "--conf", dest="conf", help="The conf file to load", default='./tests/conf.ini', type="str")
 
-smSpider = SmSpider()
-smSpider.getStocks()
-print (len(smSpider.stockList))
-for item in smSpider.stockList :
-    print(item.strip())
+    (options, args) = parser.parse_args()
+    print(options.conf)
+    conf = config.Config(options.conf)
+    print (conf.get("NOTIFY","email"))
+    smSpider = SmSpider()
+    #smSpider.getStocks()
+    print (len(smSpider.stockList))
+    for item in smSpider.stockList :
+        print(item.strip())
 
