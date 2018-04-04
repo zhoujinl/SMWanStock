@@ -1,0 +1,26 @@
+## getStock
+
+发信人: wanxiaotong (wanxiaotong), 信区: SMIF
+标  题: Re: 学习基金操作
+发信站: 水木社区 (Wed Jan  3 15:20:45 2018), 站内
+
+B 300009 1100 26.12
+B 600383 2400 13.81
+B 600383 3200 13.82
+B 600516 2000 30.56
+S 300726 2200 28.88
+S 300726 100 28.67
+S 603937 2500 24.90
+S 603076 1000 37.75
+--
+※ 修改:·wanxiaotong 于 Jan  5 16:56:09 2018 修改本文·[FROM: 183.160.228.*]
+※ 来源:·水木社区 http://www.newsmth.net·[FROM: 36.5.70.*]
+
+
+<p>发信人:] wanxiaotong (wanxiaotong), 信区: SMIF <br> 标&nbsp;&nbsp;题: Re: 学习基金操作 <br> 发信站: 水木社区 (Wed Jan&nbsp;&nbsp;3 15:20:45 2018), 站内 <br>&nbsp;&nbsp;<br> B 300009 1100 26.12 <br> B 600383 2400 13.81 <br> B 600383 3200 13.82 <br> B 600516 2000 30.56 <br> S 300726 2200 28.88 <br> S 300726 100 28.67 <br> S 603937 2500 24.90 <br> S 603076 1000 37.75 <br> -- <br> <font class="f006">※ 修改:·wanxiaotong 于 Jan&nbsp;&nbsp;5 16:56:09 2018 修改本文·[FROM: 183.160.228.*]</font><font class="f000"> <br> </font><font class="f000"></font><font class="f007">※ 来源:·水木社区 <a target="_blank" href="http://www.newsmth.net">http://www.newsmth.net</a>·[FROM: 36.5.70.*]</font><font class="f000"> <br> </font></p>
+
+## getPaege
+<li class="page-pre">贴数:<i>232</i> 分页:</li>
+
+
+
