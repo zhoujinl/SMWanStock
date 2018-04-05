@@ -1,4 +1,10 @@
+numpy
+pandas
+lxml
+tushare
+openpyxl
 urllib
 urllib2
 cookielib
 optparse
+smtplib

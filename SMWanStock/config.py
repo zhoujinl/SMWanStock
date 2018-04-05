@@ -2,6 +2,9 @@
 import sys,os,time
 import ConfigParser
 
+from SMWanStock.load import Load
+
+
 class Config:
     def __init__(self, file):
         self.file = file
@@ -42,7 +45,14 @@ def write_config(config_file_path, field, key, value):
     return True
 
 if __name__ == "__main__":
-    conf =   Config("../tests/conf.ini")
-    print(conf.get("CONF","key"))
+    conf =  Config("../tests/conf.ini")
+    print(conf.get("FILE","path"))
+    #ld = Load(conf.get("FILE","path"))
+    #ld.read()
+    import re
+    a = 'B 000935 四川爽吗 21.18 2700'
+    b=re.sub(u'[^A-Za-z0-9_\s.]',r'',a)
+    b = b.replace('  ', ' ')
+    print(b.split(" "))
 
 
