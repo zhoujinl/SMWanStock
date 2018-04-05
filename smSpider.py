@@ -8,6 +8,7 @@ import time
 from SMWanStock.load import Load
 from SMWanStock.notify import Notify
 from SMWanStock.persistence import Persistence
+from SMWanStock.stock import Stock
 
 '''
 需要模拟帐号登陆的过程，再从中抓取用户登陆的Url,网页输出内容的url
@@ -146,8 +147,11 @@ if __name__ == '__main__':
         latestPersistence.close()
 
         if bool(isNotify) : # 发邮件
+            st = Stock(diffList)
+            st.getStockInfo()
+
             notf = Notify("smtp.126.com", "zhoujinl", "zy123456", "zhoujinl@126.com", "zhoujinl@126.com")
-            notf.send('\r\n'.join(diffList))
+            notf.send('\r\n'.join(st.stcokInfoList))
 
     ##TODO 显示股票详细信息
 
