@@ -19,19 +19,22 @@ class Stock:
         self.stcokInfoList = []
 
     def getStockInfo(self):
+
         for row in self.stockList:
             #print ("------------"+row)
             sr = row.split(",")
 
             df = ts.get_realtime_quotes(sr[1])
+            print(df)
             code = df.ix[0,['code']].to_string().encode('utf-8').replace("    ",":")
             name = df.ix[0,['name']].to_string().encode('utf-8').replace("    ",":")
             price = df.ix[0,['price']].to_string().decode().encode('utf-8').replace("    ",":")
             high = df.ix[0,['high']].to_string().decode().encode('utf-8').replace("    ",":")
             low = df.ix[0,['low']].to_string().decode().encode('utf-8').replace("    ",":")
+            pre_close = df.ix[0,['pre_close']].to_string().decode().encode('utf-8').replace("    ",":")
             time = df.ix[0, ['time']].to_string().decode().encode('utf-8').replace("    ", ":")
 
-            info = row + " ===> " + code + ","+ name +","+ price +  "," + high + ","+ low + ","+ time
+            info = row + " ===> " + code + ","+ name +","+ price +  "," + high + ","+ low + ","+ pre_close  + ","+ time
             self.stcokInfoList.append(info)
 
 

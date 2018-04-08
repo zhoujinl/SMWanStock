@@ -114,7 +114,7 @@ if __name__ == '__main__':
     from SMWanStock import config
 
     parser = OptionParser()
-    parser.add_option("-c", "--conf", dest="conf", help="The conf file to load", default='./tests/conf.ini', type="str")
+    parser.add_option("-c", "--conf", dest="conf", help="The conf file to load", default='./tests/config.ini', type="str")
 
     (options, args) = parser.parse_args()
     # 获取配置文件
@@ -122,42 +122,53 @@ if __name__ == '__main__':
     fileName = conf.get("FILE","path") + conf.get("FILE","file")
     isNotify = conf.get("BASE","notify")
 
-    # 获取sm交易信息
-    smSpider = SmSpider()
-    smSpider.getStocks()
-    smSpider.stockList
+    while True:
+        time.sleep(1)   # 停顿Ns  防止被网站和谐
+        try :
+            # 获取sm 交易信息
+            smSpider = SmSpider()
+            smSpider.getStocks()
+            smSpider.stockList
 
 
-    # 创建加载对象,获得stock列表
-    latestLoad = Load(fileName)
-    latestLoad.read()
-    latestLoad.rowList
+            # 创建加载对象,获得stock列表
+            latestLoad = Load(fileName)
+            latestLoad.read()
+            latestLoad.rowList
 
-    diffList = []
-    ## 对比是否有更新，默认新增的值在文件的最后位置
-    for i in range(len(latestLoad.rowList),len(smSpider.stockList)):
-        diffList.append(smSpider.stockList[i])
+            diffList = []
+            ## 对比是否有更新，默认新增的值在文件的最后位置
+            for i in range(len(latestLoad.rowList),len(smSpider.stockList)):
+                diffList.append(smSpider.stockList[i])
 
-    print(diffList)
-    if len(diffList) > 0 :
+            print(diffList)
+            print(smSpider.stockList[-3:])
 
-        # 创建持久化对象，持久化操作
-        latestPersistence = Persistence(fileName)
-        # 保存灯芯
-        smSpider.persistence(latestPersistence)
-        latestPersistence.close()
+            if len(diffList) > 0 :
 
-        if bool(isNotify) : # 发邮件
-            st = Stock(diffList)
-            st.getStockInfo()
+                # 创建持久化对象，持久化操作
+                latestPersistence = Persistence(fileName)
+                # 保存持久对象到excel
+                smSpider.persistence(latestPersistence)
+                latestPersistence.close()
 
-            host = conf.get("NOTIFY","host")
-            user =  conf.get("NOTIFY","user")
-            passwd = conf.get("NOTIFY","passwd")
-            sender = conf.get("NOTIFY","sender")
-            receivers = conf.get("NOTIFY","receivers")
-            notf = Notify(host, user, passwd, sender, receivers)
-            notf.send('\r\n'.join(st.stcokInfoList))
+                if bool(isNotify) : # 发邮件
+                    st = Stock(diffList)
+                    st.getStockInfo()
+
+                    host = conf.get("NOTIFY","host")
+                    user =  conf.get("NOTIFY","user")
+                    passwd = conf.get("NOTIFY","passwd")
+                    sender = conf.get("NOTIFY","sender")
+                    receivers = conf.get("NOTIFY","receivers")
+                    notf = Notify(host, user, passwd, sender, receivers)
+                    notf.send('\r\n'.join(st.stcokInfoList))
+
+        except IOError,e  :
+            print "===> %d : %s, % " % ( e.code,e.msg)
+        except :
+            print "===> There must be a problem!"
+
 
     ##TODO 显示股票详细信息
 
