@@ -123,7 +123,7 @@ if __name__ == '__main__':
     isNotify = conf.get("BASE","notify")
 
     while True:
-        time.sleep(1)   # 停顿Ns  防止被网站和谐
+        time.sleep(5)   # 停顿Ns  防止被网站和谐
         try :
             # 获取sm 交易信息
             smSpider = SmSpider()
@@ -165,7 +165,7 @@ if __name__ == '__main__':
                     notf.send('\r\n'.join(st.stcokInfoList))
 
         except IOError,e  :
-            print "===> %d : %s, % " % ( e.code,e.msg)
+            print "===> %d : %s " % ( e.code,e.msg)
         except :
             print "===> There must be a problem!"
 
