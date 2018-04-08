@@ -6,7 +6,7 @@ from email.header import Header
 
 '''
 网易126邮箱，使用 用户名+授权码 进行登陆
-设置->客户端授权密码 z*1
+设置->客户端授权密码 z*1*
 '''
 
 class Notify:
@@ -37,5 +37,6 @@ class Notify:
             print "Error: 无法发送邮件",e.args
 
 if __name__ == "__main__":
-    notf = Notify("smtp.126.com","zhoujinl","***","zhoujinl@126.com","zhoujinl@126.com")
+    #notf = Notify("smtp.126.com","zhoujinl","*****","zhoujinl@126.com","zhoujinl@126.com")
+    notf = Notify("mail.ffcs.cn","zhoujl","****","zhoujl@ffcs.cn","zhoujinl@126.com")
     notf.send("Cesi 中华狮山")

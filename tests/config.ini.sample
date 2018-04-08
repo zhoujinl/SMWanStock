@@ -2,11 +2,11 @@
 notify=ture
 
 [NOTIFY]
-host=smtp.126.com
-user=zhoujinl@126.com
-passwd=****
-sender=sender
-receivers=receivers
+host=***
+user=***
+passwd=***
+sender=***
+receivers=***
 
 [FILE]
 path=E:/Git/SMWanStock/tests/data/

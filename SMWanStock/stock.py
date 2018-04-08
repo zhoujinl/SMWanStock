@@ -6,6 +6,7 @@ import pandas
 import numpy
 import bs4
 
+
 import tushare as ts
 
 class Stock:

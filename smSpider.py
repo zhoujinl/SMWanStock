@@ -134,7 +134,7 @@ if __name__ == '__main__':
     latestLoad.rowList
 
     diffList = []
-    ## 对比是否有更新
+    ## 对比是否有更新，默认新增的值在文件的最后位置
     for i in range(len(latestLoad.rowList),len(smSpider.stockList)):
         diffList.append(smSpider.stockList[i])
 
@@ -143,14 +143,20 @@ if __name__ == '__main__':
 
         # 创建持久化对象，持久化操作
         latestPersistence = Persistence(fileName)
-        # smSpider.persistence(latestPersistence)
+        # 保存灯芯
+        smSpider.persistence(latestPersistence)
         latestPersistence.close()
 
         if bool(isNotify) : # 发邮件
             st = Stock(diffList)
             st.getStockInfo()
 
-            notf = Notify("smtp.126.com", "zhoujinl", "zy123456", "zhoujinl@126.com", "zhoujinl@126.com")
+            host = conf.get("NOTIFY","host")
+            user =  conf.get("NOTIFY","user")
+            passwd = conf.get("NOTIFY","passwd")
+            sender = conf.get("NOTIFY","sender")
+            receivers = conf.get("NOTIFY","receivers")
+            notf = Notify(host, user, passwd, sender, receivers)
             notf.send('\r\n'.join(st.stcokInfoList))
 
     ##TODO 显示股票详细信息
