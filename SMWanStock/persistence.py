@@ -24,7 +24,9 @@ class Persistence:
 
     def write(self, row):
         # Rows can also be appended
-        self.ws.append([row[0], row[1], row[2], row[3], row[4]])
+        #self.ws.append([row[0], row[1], row[2], row[3], row[4]])
+        self.ws.append(row)
+
 
     def save2xlsx(self):
         self.wb.save(self.filename)

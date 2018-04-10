@@ -15,9 +15,10 @@ from SMWanStock.stock import Stock
 '''
 class SmSpider:
     def __init__(self):
+        proxy = {'http': '106.46.136.112:808'}
         self.cookies =  cookielib.CookieJar()
-        self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self.cookies ))
-        self.opener = urllib2.build_opener(urllib2.ProxyHandler({'http': 'http://127.0.0.1:1080'}))
+        #self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self.cookies ))
+        self.opener = urllib2.build_opener(urllib2.ProxyHandler(proxy))
 
         self.postdata = urllib.urlencode({
             'id': 'jalon',
@@ -140,12 +141,10 @@ if __name__ == '__main__':
             ## 对比是否有更新，默认新增的值在文件的最后位置
             for i in range(len(latestLoad.rowList),len(smSpider.stockList)):
                 diffList.append(smSpider.stockList[i])
-
             print(diffList)
             print(smSpider.stockList[-3:])
 
             if len(diffList) > 0 :
-
                 # 创建持久化对象，持久化操作
                 latestPersistence = Persistence(fileName)
                 # 保存持久对象到excel
@@ -163,10 +162,12 @@ if __name__ == '__main__':
                     receivers = conf.get("NOTIFY","receivers")
                     notf = Notify(host, user, passwd, sender, receivers)
                     notf.send('\r\n'.join(st.stcokInfoList))
+        except urllib2.URLError, e:
+            print "===>  %s " % (e.__str__())
 
         except IOError,e  :
             print "===> %d : %s " % ( e.code,e.msg)
-        except :
+        else :
             print "===> There must be a problem!"
 
 
